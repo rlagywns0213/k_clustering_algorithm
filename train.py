@@ -13,6 +13,7 @@ with open('configuration.yaml') as f:
 iter_num = configuration['iter_num']
 cluster_num = configuration['cluster_num']
 data_num = configuration['data_num']
+distance = configuration['distance']
 #hidden = configuration['hidden']
 
 
@@ -25,6 +26,8 @@ parser.add_argument('--cluster_num', type=int, default=cluster_num,
                     help='Number of cluster_num to train.')
 parser.add_argument('--data_num', type=int, default=data_num,
                     help='Number of data_num to train.')
+parser.add_argument('--distance', type=float, default=distance,
+                    help='distance for dataset')
 parser.add_argument('--center', required = False, default='means',
                     help='how to calculate center')
 
@@ -35,7 +38,8 @@ np.random.seed(args.seed)
 # Load data
 data_num = args.data_num
 k = args.cluster_num  # hyper paramters
-x, real_answer =load_data(data_num, k)
+dt = args.distance
+x, real_answer =load_data(data_num, k,dt)
 centers = x[np.random.choice(len(x), size=k, replace=False)] #center: data point 중 무작위로 출력
 
 # train

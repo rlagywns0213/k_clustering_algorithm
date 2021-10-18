@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-def load_data(data_num, k):
+def load_data(data_num, k,dt):
     # Load data
     x = []  # data
 
     np.random.seed(0)
     for i in range(k):
-        x.extend(np.random.normal(loc=[i*2.5,i*2.5], scale=0.5, size=(data_num, 2)).tolist()) # *2.5 데이터 거리 구분 위함 
+        x.extend(np.random.normal(loc=[i*dt,i*dt], scale=0.5, size=(data_num, 2)).tolist()) # *2.5 데이터 거리 구분 위함 
         if i == 0:
             real_answer = [0] * data_num
         else:
@@ -36,7 +36,17 @@ def means_center(graph):
     calculate center(means) 
     '''
     np_graph = np.array(graph)
+    
     return np_graph.mean(axis=0)
+
+
+# def median_center(graph):
+#     '''
+#     calculate center(median) 
+#     '''
+#     np_graph = np.array(graph)
+#     list_median = list((np.median(np_graph[:,0]),np.median(np_graph[:,1])))
+#     return np.array(list_median)
 
 def visualize(iter, log, real_answer, data_num, cluster_num):
     plt.figure(figsize=(15,8))
