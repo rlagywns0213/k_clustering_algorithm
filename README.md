@@ -43,4 +43,4 @@ Visualization png saved in results!!
 ####  1. PCA
 
   - data : 100,000 , 3 cluster 
-  <center><img src="results/cora/data_100000, cluster_3.png" width="50%" height="50%"></center>
+  <center><img src="results/cora/data_100000,cluster_3.png" width="50%" height="50%"></center>
