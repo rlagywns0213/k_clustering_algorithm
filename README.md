@@ -5,6 +5,12 @@
 
 - I used `np.random.normal`
 - And i increase some distance between clusters.`loc=[i*dt,i*dt], scale=0.5, size=(data_num, 2)`
+
+## Initialize : how to reduce time 
+
+1. Just Random Sample Centroid
+2. 1 Random Sample => Max( mean Distance of centroid )
+ 
 ## Usage
 
 ```bash
@@ -74,7 +80,7 @@ Visualization png saved in results!!
 
   - data : 100,000 , cluster : 3, distance : 0
   <center><img src="results/data_100000, cluster_3.png" width="50%" height="50%"></center>
-  
+
   ```bash
   Iteration: 0001 time: 5.0046s
   Iteration: 0002 time: 5.1961s

@@ -5,7 +5,10 @@ import pandas as pd
 import random
 from models import cluster_modeling
 import yaml
-from utils import load_data, visualize
+from utils import load_data, visualize, center_initialize
+import seaborn as sns 
+import matplotlib.pyplot as plt
+
 # config
 with open('configuration.yaml') as f:
   configuration = yaml.load(f)
@@ -28,19 +31,30 @@ parser.add_argument('--data_num', type=int, default=data_num,
                     help='Number of data_num to train.')
 parser.add_argument('--distance', type=float, default=distance,
                     help='distance for dataset')
-parser.add_argument('--center', required = False, default='means',
-                    help='how to calculate center')
+parser.add_argument('--init', required = False, default='random',
+                    help='how to initialize')
 
 args = parser.parse_args()
-np.random.seed(args.seed)
+seed = args.seed
+np.random.seed(seed)
 
 
 # Load data
 data_num = args.data_num
 k = args.cluster_num  # hyper paramters
 dt = args.distance
-x, real_answer =load_data(data_num, k,dt)
-centers = x[np.random.choice(len(x), size=k, replace=False)] #center: data point 중 무작위로 출력
+x, real_answer =load_data(data_num, k,dt,seed)
+
+initialize = args.init
+if initialize == 'random':
+  centers = x[np.random.choice(len(x), size=k, replace=False)] #center: data point 중 무작위로 출력
+else:  
+  centers = center_initialize(x,k)
+
+#시각화
+sns.scatterplot(x=x[:,0], y=x[:,1]) #기존 그래프 그리기
+sns.scatterplot(x=centers[:,0], y=centers[:,1]) #기존 그래프 그리기
+plt.show()
 
 # train
 t = time.time()
@@ -49,5 +63,5 @@ print('All clustering time: {:.4f}s'.format(time.time() - t))
 
 # figure
 print("classification & Visualize Start")
-visualize(iter, log, real_answer, data_num, cluster_num)
+visualize(iter, log, real_answer, data_num, k,dt,initialize)
 
