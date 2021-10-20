@@ -6,15 +6,15 @@
 - I used `np.random.normal`
 - And i increase some distance between clusters.`loc=[i*dt,i*dt], scale=0.5, size=(data_num, 2)`
 
-## Initialize : how to reduce time 
+## Initialize : how to reduce time
 
 1. Just Random Sample Centroid
 2. 1 Random Sample => Max( mean Distance of centroid )
- 
+
 ## Usage
 
 ```bash
-python train.py 
+python train.py
 ```
 
 > initial configuration  
@@ -47,7 +47,7 @@ Visualization png saved in results!!
 
 ####  Distance : 2.5
 
-  
+
   - data : 10,000 , 4 cluster, distance : 2.5
   <center><img src="results/data_10000, cluster_3.png" width="50%" height="50%"></center>
 
@@ -124,3 +124,30 @@ Visualization png saved in results!!
   iteration 19's accuracy : 99.83%
   Visualization png saved in results!!
   ```
+
+## My Idea
+
+  - data : 200,000 , cluster : 10, distance : 3.5
+
+  ![image](https://user-images.githubusercontent.com/28617444/138086380-f5506967-3c0b-4b51-aeb9-1789a3e88602.png)
+
+#### log
+
+  ```bash
+  Iteration: 0001 time: 9.3414s
+  Iteration: 0002 time: 9.7300s
+  2 iter early stopped!
+  All clustering time: 29.1654s   
+  classification & Visualize Start
+  iteration 1's accuracy : 98.8%
+  iteration 2's accuracy : 100.0%
+  ```
+  
+#### centroid 결과
+  ![image](https://user-images.githubusercontent.com/28617444/138086560-0a2d7c2a-fe28-44dc-8dcc-c90b97934674.png)
+
+#### Clustering 결과
+
+  <center><img src="experiments\data_20000, cluster_10,distance_3.5,init_new.png" width="50%" height="50%"></center>
+
+  - The most efficient Centroids initialize
